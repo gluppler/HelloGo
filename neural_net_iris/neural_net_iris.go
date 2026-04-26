@@ -1,39 +1,3 @@
----
-tags:
-  - type/note
-  - theme/golang
-  - theme/machine-learning
-aliases: []
-lead: Complete, buildable Go implementation of a feedforward neural network trained on the iris dataset. Fixes three bugs from the original gophernet source.
-created: 2026-04-27
-modified: 2026-04-27
-source: "github.com/dwhitena/gophernet — fixed and extended."
----
-
-# Project — neural net iris
-
-Based on Daniel Whitenack's `gophernet`. Three bugs from the original are fixed here:
-
-1. `sigmoidPrime` used `sigmoid(x)*(1-sigmoid(x))`, applying sigmoid to already-activated values. Correct form is `x*(1-x)`.
-2. `makeInputsAndLabels` allocated `len(rawCSVData)` rows including the header, leaving a phantom zero row. Fixed with `len(rawCSVData)-1`.
-3. `log.Fatal` inside helpers replaced with returned errors.
-
-additionals: `context.Context` in `backpropagate` for epoch-level cancellation.
-
-## Setup
-
-```bash
-go mod init neural_net_iris
-go get gonum.org/v1/gonum
-go mod tidy
-# copy data/ from github.com/dwhitena/gophernet
-go run main.go
-# → Accuracy = 0.97
-```
-
-## main.go
-
-```go
 package main
 
 import (
@@ -341,23 +305,3 @@ func main() {
 
 	fmt.Printf("\nAccuracy = %.2f\n\n", float64(truePosNeg)/float64(numPreds))
 }
-```
-
----
-
-# Back Matter
-
-**Source**
-
-- based_on:: [[MOC - Golang]]
-
-**References**
-
-- see:: [[AI-ML Neural Network in Go]] — line-by-line walkthrough of every function here
-- see:: [[AI-ML Neural Network Foundations]] — the math this code implements
-- see:: [[Go Error Handling]] — why makeInputsAndLabels returns errors instead of calling log.Fatal
-- see:: [[Goroutines]] — context lifecycle pattern used in backpropagate
-
-**Terms**
-
-- neuralNet, neuralNetConfig, backpropagate, sigmoidPrime fix, sumAlongAxis, makeInputsAndLabels, off-by-one fix, context cancellation
