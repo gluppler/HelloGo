@@ -27,6 +27,46 @@ go.work.sum
 # env file
 .env
 .DS_Store
+
+# Agentic/AI files and directories
+# OpenAI Codex
+.codex/
+.claude/
+.opencode/
+
+# Anthropic Claude
+.claude/
+
+# Google Gemini
+.gemini/
+
+# Microsoft Copilot
+.copilot/
+
+# AWS CodeWhisperer
+.codewhisperer/
+
+# JetBrains AI
+.idea/
+
+# VS Code AI
+.vscode/
+
+# Generic AI agent data
+*.ai_state
+*.ai_context
+
+# Agent logs
+*.agent.log
+ai-*.log
+
+# Agent config files
+.agentrc
+aiconfig.*
+
+# AGENTS.md (project-specific instructions)
+AGENTS.md
+
 # Editor/IDE
 # .idea/
 # .vscode/
